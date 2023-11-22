@@ -1,14 +1,6 @@
 @include('include/items')
 <title>Auth Page</title>
   <main>
-  <style>
-    body {
-      background-image: url('NiceAdmin/assets/img/bg_mem.webp');
-      background-repeat: no-repeat;
-      /* background-attachment: fixed;   */
-      background-size: cover;
-    }
-  </style>
     <div class="container">
 
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
@@ -17,9 +9,9 @@
             <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
               <div class="d-flex justify-content-center py-4">
-                <a href="index.html" class="logo d-flex align-items-center w-auto">
-                  <img src="assets/img/logo.png" alt="">
-                  <span class="d-none d-lg-block">NiceAdmin</span>
+                <a href="#" class="logo d-flex align-items-center w-auto">
+                  <img src="{{asset('NiceAdmin/assets/img/logo.svg')}}" alt="">
+                  <!-- <span class="d-none d-lg-block">NiceAdmin</span> -->
                 </a>
               </div><!-- End Logo -->
 
@@ -76,6 +68,7 @@
               </div>
 
               <div class="credits">
+
                 <!-- All the links in the footer should remain intact. -->
                 <!-- You can delete the links only if you purchased the pro version. -->
                 <!-- Licensing information: https://bootstrapmade.com/license/ -->
