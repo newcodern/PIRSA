@@ -7,7 +7,6 @@
 </head>
 <body>
 @include('include/navbar')
-@include('include/sidebar')
 
 
  <main id="main" class="main">
@@ -41,10 +40,10 @@
                         <th scope="col">Nama</th>
                         <th scope="col">Berlaku</th>
                         <th scope="col">Tempat & Tanggal Lahir</th>
-                        <th scope="col">Jenis Kelamin</th>
-                        <th scope="col">Tinggi</th>
+                        <th scope="col">id driver</th>
                         <th scope="col">No. KIM</th>
                         <th scope="col">KIM</th>
+                        <th scope="col">actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,11 +52,18 @@
                         <td>{{$KA->nama}}</td>
                         <td>{{$KA->berlaku}}</td>
                         <td>{{$KA->ttl}}</td>
-                        <td>{{$KA->jenis_kelamin}}</td>
-                        <td>{{$KA->tinggi}}</td>
+                        <td>{{$KA->id_driver}}</td>
                         <td>{{$KA->noKIM}}</td>
                         <td><img src="{{ asset('uploads/' . $KA->foto) }}" alt="Foto Pengemudi" class="img-thumbnail"
-                                style="max-width: 100px;"></td>
+                                style="max-width: 100px;">
+                        </td>
+                        <td>
+                        <form id="deleteForm" action="{{ route('auth.Bottomadmin.index.manage.KIMandID.remove', ['id' => $KA->noKIM]) }}" method="POST">
+                        @csrf
+                        <button type="button" class="btn btn-sm btn-danger" style="margin-top:10px;" onclick="konfirmasi('{{ route('auth.Bottomadmin.index.manage.KIMandID.remove', ['id' => $KA->noKIM]) }}','[ID Driver: {{$KA->id_driver}}] [No. KIM: {{$KA->noKIM}}]')">
+                          remove
+                        </button>
+                      </form></td>
                     </tr>
                 @empty
 
@@ -72,6 +78,25 @@
 
   </main>
 
+    <script>
+    function konfirmasi(route, message) {
+        Swal.fire({
+            title: 'Apakah Anda Yakin ingin menghapus ini?',
+            text: message,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Hapus'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('deleteForm').submit();
+            }
+        });
+    }
+</script>
+
+@include('include/alerts_header')
 
 </body>
 </html>

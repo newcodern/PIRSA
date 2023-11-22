@@ -22,18 +22,23 @@ Route::get('/', function () {
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/auth/', [KontrollerUtama::class, 'auth_main_login_OR_register'])->name('auth.main');
-    Route::post('/auth/send/login', [KontrollerUtama::class, 'auth_BA'])->name('auth.send.login');
+    Route::post('/auth/send/login', [KontrollerUtama::class, 'auth_main'])->name('auth.send.login');
 }); 
 
-
+// ADMIN LEVEL 2 //
 Route::middleware(['auth:AbottomAdmin', 'AbottomAdmin'])->group(function () {
-    Route::get('/auth/dashboard/', [KontrollerUtama::class, 'dashboard_BottomAdmin'])->name('auth.Bottomadmin.index');
+    Route::post('/auth/dashboard/logout/admin', [KontrollerUtama::class, 'logout_main'])->name('auth.Bottomadmin.logout');
+    Route::get('/auth/dashboard/admin', [KontrollerUtama::class, 'dashboard_BottomAdmin'])->name('auth.Bottomadmin.index');
 
     Route::get('/auth/dashboard/manage/users', [KontrollerUtama::class, 'dashboard_BottomAdmin_mgUSR'])->name('auth.Bottomadmin.index.manage.users');
 
     Route::get('/auth/dashboard/manage/KIMandID', [KontrollerUtama::class, 'dashboard_BottomAdmin_mgKIMandID_D'])->name('auth.Bottomadmin.index.manage.KIMandID');
 
+    Route::post('auth/dashboard/manage/KIMandID/remove/{id}', [KontrollerUtama::class, 'BA_rm_kim'])->name('auth.Bottomadmin.index.manage.KIMandID.remove');
+
     Route::get('/auth/dashboard/manage/IdDriver', [KontrollerUtama::class, 'dashboard_BottomAdmin_mgIDDriver'])->name('auth.Bottomadmin.index.manage.mgIDDriver');
+
+    Route::post('/auth/dashboard/manage/IdDriver/update/{id}', [KontrollerUtama::class, 'BA_id_driver_edit'])->name('auth.Bottomadmin.index.manage.mgIDDriver.update');
 
     Route::post('/auth/dashboard/manage/KIMandID/store/kim', [KontrollerUtama::class, 'auth_BA_store_kim'])->name('auth.Bottomadmin.index.manage.KIMandID.store');
 
@@ -41,8 +46,17 @@ Route::middleware(['auth:AbottomAdmin', 'AbottomAdmin'])->group(function () {
 
     Route::get('/auth/dashboard/manage/IdDriver/add', [KontrollerUtama::class, 'dashboard_BottomAdmin_mgIDDriver_add'])->name('auth.Bottomadmin.index.manage.mgIDDriver.add');
 
+    Route::post('auth/dashboard/manage/IdDriver/remove/{id}', [KontrollerUtama::class, 'BA_rm_id_driver'])->name('auth.Bottomadmin.index.manage.mgIDDriver.remove');
+
     Route::get('/auth/dashboard/manage/KIMandID/add', [KontrollerUtama::class, 'dashboard_BottomAdmin_mgKIMandID_add'])->name('auth.Bottomadmin.index.manage.KIMandID.add');
 
-    Route::post('/auth/dashboard/logout', [KontrollerUtama::class, 'logout_auth_BA'])->name('auth.Bottomadmin.logout');
     Route::post('/auth/send/add/user', [KontrollerUtama::class, 'store_pengguna'])->name('auth.send.add');
 });
+// ADMIN LEVEL 2 END //
+
+// SECURITY //
+Route::middleware(['auth:ASecurity', 'ASecurity'])->group(function () {
+    Route::post('/auth/dashboard/logout/security', [KontrollerUtama::class, 'logout_main'])->name('auth.ASecurity.logout');
+    Route::get('/auth/dashboard/security', [KontrollerUtama::class, 'dashboard_ASecurity'])->name('auth.ASecurity.index');
+});
+// SECURITY END //

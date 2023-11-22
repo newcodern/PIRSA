@@ -1,71 +1,46 @@
 @include('include/items')
+@include('include/ordinary_navbar')
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Our Company</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        header {
-            background-color: #eee;
-            color: #252525;
-            text-align: center;
-            padding: 40px 20px;
-        }
-
-        section {
-            padding: 40px 20px;
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 36px;
-            margin-bottom: 20px;
-        }
-
-        p {
-            font-size: 18px;
-            margin-bottom: 30px;
-        }
-        footer {
-            background-color: #ddd;
-            color: #252525;
-            text-align: center;
-            padding: 20px;
-            width: 100%;
-            bottom: 0;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Welcome</title>
 </head>
-<body>
-
-<header>
-    <h1>Welcome to Our Company</h1>
-    <p>Empowering Innovation, Delivering Excellence</p>
-    <a href="{{route('auth.main')}}" class="btn btn-success btn-lg">Get Started</a>
-</header>
-
-<section>
-    <h2>About Us</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
-</section>
-
-<section>
-    <h2>Our Services</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
-</section>
-
-<footer>
-    &copy; 2023 Our Company. All rights reserved.
-</footer>
-
+<body style="padding-top: 50px;">
+  <header class="bg-primary text-white text-center py-5">
+    <div class="container">
+      <h1 class="display-4">Portal Page</h1>
+      <p class="lead">Crafting beautiful and innovative solutions for your needs.</p>
+      <a href="{{route('auth.main')}}" class="btn btn-light btn-lg">Auth Page</a>
+    </div>
+  </header>
+  <section class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <h2 class="display-4">About Us</h2>
+          <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
+        </div>
+        <div class="col-lg-6">
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="bg-light py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+        </div>
+        <div class="col-lg-6">
+          <h2 class="display-4">Contact Us</h2>
+          <p class="lead">Get in touch with us for any inquiries or collaborations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer class="bg-dark text-white text-center py-3">
+    <p>&copy; Pirsa.</p>
+  </footer>
 </body>
 </html>

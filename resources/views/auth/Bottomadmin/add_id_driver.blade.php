@@ -7,7 +7,6 @@
 </head>
 <body>
 @include('include/navbar')
-@include('include/sidebar')
 
 
  <main id="main" class="main">
@@ -41,21 +40,8 @@
 
             <div class="mb-3">
                 <label for="tanggal-lahir" class="form-label">Tempat & Tanggal Lahir</label>
-                <input placeholder="tempat lahir" class="form-control" required type="text" name="tempat"><br>
+                <input pattern="[^,]*" placeholder="tempat lahir" class="form-control" required type="text" name="tempat"><br>
                 <input name="tanggal" required type="date" class="form-control" id="tanggal-lahir">
-            </div>
-
-            <div class="mb-3">
-                <label for="jenis-kelamin" class="form-label">Jenis Kelamin</label>
-                <select required name="jenis_kelamin" class="form-select" id="jenis-kelamin">
-                    <option selected value="laki-laki">Laki-laki</option>
-                    <option value="perempuan">Perempuan</option>
-                </select>
-            </div>
-
-            <div class="mb-3">
-                <label for="nomor-telepon" class="form-label">Tinggi</label>
-                <input required name="tinggi_badan" type="number" class="form-control" id="nomor-telepon" placeholder="Tinggi Badan">
             </div>
 
             <div class="mb-3">
@@ -71,6 +57,6 @@
 
   </main>
 
-
+@include('include/alerts_header')
 </body>
 </html>

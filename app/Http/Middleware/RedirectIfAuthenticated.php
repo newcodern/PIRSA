@@ -21,7 +21,9 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if(auth('AbottomAdmin')->check()){
-                return redirect('/auth/dashboard/');
+                return redirect('/auth/dashboard/admin');
+            }elseif(auth('ASecurity')->check()){
+                return redirect('/auth/dashboard/security');
             }
 
         }
