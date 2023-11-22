@@ -78,10 +78,8 @@
                     <tr>
                         <th scope="col">Nama</th>
                         <th scope="col">Tempat & Tanggal Lahir</th>
-                        <th scope="col">Jenis Kelamin</th>
-                        <th scope="col">Tinggi</th>
                         <th scope="col">ID Driver</th>
-                        <th scope="col">Foto Driver</th>
+                        <th scope="col">No. SIM</th>
                         <th scope="col">View ID Driver</th>
                         <th scope="col">Action</th>
                     </tr>
@@ -91,11 +89,8 @@
                     <tr>
                         <td>{{$IdD->nama}}</td>
                         <td>{{$IdD->ttl}}</td>
-                        <td>{{$IdD->jenis_kelamin}}</td>
-                        <td>{{$IdD->tinggi}}</td>
                         <td>{{$IdD->id_driver}}</td>
-                        <td><img src="{{ asset('uploads/' . $IdD->foto) }}" alt="Foto Pengemudi" class="img-thumbnail"
-                                style="max-width: 100px;"></td>
+                        <td>{{$IdD->no_sim}}</td>
                         <td>
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{$IdD->id_driver}}">view</button>
                         <div class="modal fade" id="exampleModal{{$IdD->id_driver}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -118,7 +113,6 @@
 
       <div class="id-card" id="id-card{{$IdD->id_driver}}">
         <center><small>PT. Maspion Energi Mitratama</small></center><br>
-        <img class="profile-img" src="{{ asset('uploads/' . $IdD->foto) }}" alt="Profile Picture">
         <div class="name"><h1>{{$IdD->nama}}</h1></div>
         <div class="position">Driver</div>
         <div class="contact">
@@ -180,8 +174,8 @@
             </div>
 
             <div class="mb-3">
-                <label for="foto" class="form-label">Upload Foto</label>
-                <input required name="foto" type="file" class="form-control" id="foto">
+                <label for="nama" class="form-label">No. SIM</label>
+                <input value="{{$IdD->no_sim}}" name="no_sim" required type="text" class="form-control" id="nama" placeholder="No. Surat Ijin Mengemudi">
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
@@ -195,9 +189,9 @@
                 </div>
               </div>
                       <span>
-                      <form id="deleteForm" action="{{ route('auth.Bottomadmin.index.manage.mgIDDriver.remove', ['id' => $IdD->id_driver]) }}" method="POST">
+                      <form id="deleteForm{{$IdD->id_driver}}" action="{{ route('auth.Bottomadmin.index.manage.mgIDDriver.remove', ['id' => $IdD->id_driver]) }}" method="POST">
                         @csrf
-                        <button type="button" class="btn btn-sm btn-danger" style="margin-top:10px;" onclick="konfirmasi('{{ route('auth.Bottomadmin.index.manage.mgIDDriver.remove', ['id' => $IdD->id_driver]) }}','ID Drive: {{$IdD->id_driver}}')">
+                        <button type="button" class="btn btn-sm btn-danger" style="margin-top:10px;" onclick="konfirmasi('{{$IdD->id_driver}}','ID Driver: {{$IdD->id_driver}}')">
                           remove
                         </button>
                       </form>
@@ -224,7 +218,7 @@
             confirmButtonText: 'Hapus'
         }).then((result) => {
             if (result.isConfirmed) {
-                document.getElementById('deleteForm').submit();
+                document.getElementById('deleteForm' + route).submit();
             }
         });
     }

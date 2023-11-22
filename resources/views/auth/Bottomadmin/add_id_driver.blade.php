@@ -45,8 +45,8 @@
             </div>
 
             <div class="mb-3">
-                <label for="foto" class="form-label">Upload Foto</label>
-                <input required name="foto" type="file" class="form-control" id="foto">
+                <label for="nama" class="form-label">No. SIM</label>
+                <input name="no_sim" required type="text" class="form-control" id="nama" placeholder="No. Surat Ijin Mengemudi">
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>

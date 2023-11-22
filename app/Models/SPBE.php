@@ -5,18 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Kim extends Model
+class SPBE extends Model
 {
     use HasFactory;
-
-    protected $table = 'kims';
+    protected $table = 'spbes';
 
     protected $fillable = [
-        'urut',
-        'nopol',
-        'kaspasitas_tangki',
-        'jenis_produk',
         'nama_pt',
-        'masa_berlaku',
+        'kode_spbe',
+        'alamat',
+        'kota',
+        'no_ref',
+        'cust_no',
+        'patra_ref',
     ];
 }
