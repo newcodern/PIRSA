@@ -40,6 +40,10 @@ return [
         'driver' => 'session',
         'provider' => 'AbottomAdmin',
     ],
+    'ASecurity' => [
+        'driver' => 'session',
+        'provider' => 'ASecurity',
+    ],
 ],
 
 
@@ -62,6 +66,10 @@ return [
 
 'providers' => [
     'AbottomAdmin' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Pengguna::class,
+    ],
+    'ASecurity' => [
         'driver' => 'eloquent',
         'model' => App\Models\Pengguna::class,
     ],

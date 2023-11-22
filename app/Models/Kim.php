@@ -15,8 +15,6 @@ class Kim extends Model
         'nama',
         'berlaku',
         'ttl',
-        'jenis_kelamin',
-        'tinggi',
         'noKIM',
         'foto',
     ];

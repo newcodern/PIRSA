@@ -16,9 +16,8 @@ return new class extends Migration
             $table->string('nama');
             $table->string('berlaku');
             $table->string('ttl');
-            $table->string('jenis_kelamin');
-            $table->string('tinggi');
             $table->string('noKIM');
+            $table->string('id_driver');
             $table->string('foto');
             $table->timestamps();
         });

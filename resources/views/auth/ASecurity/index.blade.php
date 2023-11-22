@@ -7,7 +7,6 @@
 </head>
 <body>
 @include('include/navbar')
-@include('include/sidebar')
  <main id="main" class="main">
 
     <div class="pagetitle">

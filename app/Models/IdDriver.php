@@ -12,6 +12,6 @@ class IdDriver extends Model
     protected $table = 'id_drivers';
 
     protected $fillable = [
-        'nama', 'ttl', 'jenis_kelamin', 'tinggi', 'foto', 'id_driver'
+        'nama', 'ttl', 'foto', 'id_driver'
     ];
 }

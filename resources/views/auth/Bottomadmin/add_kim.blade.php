@@ -7,7 +7,6 @@
 </head>
 <body>
 @include('include/navbar')
-@include('include/sidebar')
 
 
  <main id="main" class="main">
@@ -122,7 +121,7 @@
     </section>
 
   </main>
-
+@include('include/alerts_header')
 
 </body>
 </html>

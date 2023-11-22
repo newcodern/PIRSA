@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
+    <title>Manage Id Driver</title>
     <style type="text/css">
                   .id-card {
             width: 300px;
@@ -47,7 +47,6 @@
 </head>
 <body>
 @include('include/navbar')
-@include('include/sidebar')
 
 
  <main id="main" class="main">
@@ -84,6 +83,7 @@
                         <th scope="col">ID Driver</th>
                         <th scope="col">Foto Driver</th>
                         <th scope="col">View ID Driver</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -147,6 +147,62 @@
                         </div>
                         </div>
                     </td>
+                    <td>
+              <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#ExtralargeModal{{$IdD->id_driver}}">
+                edit
+              </button>
+              <div class="modal fade" id="ExtralargeModal{{$IdD->id_driver}}" tabindex="-1">
+                <div class="modal-dialog modal-xl">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Extra Large Modal</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+              <div class="container">
+        <h2 class="mb-4">Edit</h2>
+
+        <form enctype="multipart/form-data" method="post" action="{{route('auth.Bottomadmin.index.manage.mgIDDriver.update', ['id' => $IdD->id_driver])}}">
+          @csrf
+            <div class="mb-3">
+                <label for="nama" class="form-label">Nama Lengkap</label>
+                <input value="{{$IdD->nama}}" name="nama" required type="text" class="form-control" id="nama" placeholder="Masukkan nama lengkap">
+            </div>
+
+            <div class="mb-3">
+              @php
+              $string = $IdD->ttl;
+              $parts = explode(', ', $string);
+              @endphp
+                <label for="tanggal-lahir" class="form-label">Tempat & Tanggal Lahir</label>
+                <input pattern="[^,]*" value="{{$parts[0]}}" placeholder="tempat lahir" class="form-control" required type="text" name="tempat"><br>
+                <input value="{{$parts[1]}}" name="tanggal" required type="date" class="form-control" id="tanggal-lahir">
+            </div>
+
+            <div class="mb-3">
+                <label for="foto" class="form-label">Upload Foto</label>
+                <input required name="foto" type="file" class="form-control" id="foto">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                      <span>
+                      <form id="deleteForm" action="{{ route('auth.Bottomadmin.index.manage.mgIDDriver.remove', ['id' => $IdD->id_driver]) }}" method="POST">
+                        @csrf
+                        <button type="button" class="btn btn-sm btn-danger" style="margin-top:10px;" onclick="konfirmasi('{{ route('auth.Bottomadmin.index.manage.mgIDDriver.remove', ['id' => $IdD->id_driver]) }}','ID Drive: {{$IdD->id_driver}}')">
+                          remove
+                        </button>
+                      </form>
+                    </span>
+                  </td>
                     </tr>
                 @empty
 
@@ -154,6 +210,27 @@
                 </tbody>
             </table>
         </div>
+
+
+    <script>
+    function konfirmasi(route, message) {
+        Swal.fire({
+            title: 'Apakah Anda Yakin Iingin menghapus ini?',
+            text: message,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Hapus'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('deleteForm').submit();
+            }
+        });
+    }
+</script>
+
+@include('include/alerts_header')
     </div>
 
 

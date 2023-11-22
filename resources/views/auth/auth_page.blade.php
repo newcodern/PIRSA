@@ -1,14 +1,6 @@
 @include('include/items')
+<title>Auth Page</title>
   <main>
-  <style>
-    body {
-      background-image: url('NiceAdmin/assets/img/bg_mem.webp');
-      background-repeat: no-repeat;
-      /* background-attachment: fixed;   */
-      background-size: cover;
-    }
-  </style>
-  
     <div class="container">
 
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
@@ -47,6 +39,18 @@
                       <label for="yourPassword" class="form-label">Password</label>
                       <input type="password" name="password" class="form-control" id="yourPassword" required>
                       <div class="invalid-feedback">Please enter your password!</div>
+                    </div>
+
+                    <div class="col-12">
+                      <label for="yourPassword" class="form-label">Account Type</label>
+                      <select name="role" class="form-control">
+                          <option value="AbottomAdmin">admin</option>
+                          <option value="superAdmin">sudo admin</option>
+                          <option value="security">security</option>
+                          <option value="operator_timbangan">operator timbangan</option>
+                          <option value="operator_ccr">operator ccr</option>
+                          <option value="HSE">HSE</option>
+                      </select>
                     </div>
 
                     <div class="col-12">
