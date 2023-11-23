@@ -1,6 +1,14 @@
 @include('include/items')
 <title>Auth Page</title>
   <main>
+  <style>
+        body {
+            background-image: url('NiceAdmin/assets/img/bg_mem.webp');
+            background-repeat: no-repeat;
+            /* background-attachment: fixed;   */
+            background-size: cover;
+        }
+    </style>
     <div class="container">
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
         <div class="container">
