@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KontrollerUtama;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\Authenticate;
 
@@ -23,14 +24,14 @@ Route::get('/', function () {
 Route::middleware(['guest'])->group(function () {
     Route::get('/auth/', [KontrollerUtama::class, 'auth_main_login_OR_register'])->name('auth.main');
     Route::post('/auth/send/login', [KontrollerUtama::class, 'auth_main'])->name('auth.send.login');
-}); 
+});
 
 // ADMIN LEVEL 2 //
 Route::middleware(['auth:AbottomAdmin', 'AbottomAdmin'])->group(function () {
     Route::post('/auth/dashboard/logout/admin', [KontrollerUtama::class, 'logout_main'])->name('auth.Bottomadmin.logout');
     Route::get('/auth/dashboard/admin', [KontrollerUtama::class, 'dashboard_BottomAdmin'])->name('auth.Bottomadmin.index');
 
-    Route::get('/auth/dashboard/manage/users', [KontrollerUtama::class, 'dashboard_BottomAdmin_mgUSR'])->name('auth.Bottomadmin.index.manage.users');
+    Route::get('/auth/dashboard/manage/users', [UserController::class, 'create'])->name('auth.Bottomadmin.index.manage.users');
 
     Route::get('/auth/dashboard/manage/KIMandID', [KontrollerUtama::class, 'dashboard_BottomAdmin_mgKIMandID_D'])->name('auth.Bottomadmin.index.manage.KIMandID');
 
@@ -65,7 +66,7 @@ Route::middleware(['auth:AbottomAdmin', 'AbottomAdmin'])->group(function () {
     Route::post('/auth/dashboard/manage/kendaraan/add/run', [KontrollerUtama::class, 'dashboard_BottomAdmin_insert_run_kendaraan'])->name('auth.Bottomadmin.index.manage.kendaraan.add.run');
 
 
-    Route::post('/auth/send/add/user', [KontrollerUtama::class, 'store_pengguna'])->name('auth.send.add');
+    Route::post('/auth/send/add/user', [UserController::class, 'store'])->name('auth.send.add');
 });
 // ADMIN LEVEL 2 END //
 
