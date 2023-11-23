@@ -37,35 +37,21 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">urut</th>
-                        <th scope="col">nopol</th>
-                        <th scope="col">kapasitas tangki</th>
-                        <th scope="col">jenis produk</th>
-                        <th scope="col">nama PT</th>
-                        <th scope="col">masa berlaku</th>
-                        <th scope="col">nama driver</th>
-                        <th scope="col">id driver</th>
-                        <th scope="col">action</th>
+                        <th scope="col">Nopol</th>
+                        <th scope="col">KIR Headtruck</th>
+                        <th scope="col">Kapasitas_Tangki</th>
+                        <th scope="col">actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                @forelse($Kims_All as $KA)
-                    <tr>   
-                        <td>{{$KA->urut}}</td>
-                        <td>{{$KA->nopol}}</td>
-                        <td>{{$KA->kaspasitas_tangki}}</td>
-                        <td>{{$KA->jenis_produk}}</td>
-                        <td>{{$KA->nama_pt}}</td>
-                        <td>{{$KA->masa_berlaku}}</td>
-                        <td>{{$KA->nama_driver}}</td>
-                        <td>{{$KA->id_driver}}</td>
+                @forelse($Kendaraan_view as $KV)
+                    <tr>
+                        <td>{{$KV->Nopol}}</td>
+                        <td>{{$KV->KIR_Headtruck}}</td>
+                        <td>{{$KV->Kapasitas_Tangki}}</td>
                         <td>
-                        <form id="deleteForm" action="{{ route('auth.Bottomadmin.index.manage.KIMandID.remove', ['id' => $KA->id]) }}" method="POST">
-                        @csrf
-                        <button type="button" class="btn btn-sm btn-danger" style="margin-top:10px;" onclick="konfirmasi('{{ route('auth.Bottomadmin.index.manage.KIMandID.remove', ['id' => $KA->id]) }}','[ID Driver: {{$KA->id_driver}}] [No. KIM: {{$KA->id_driver}}]')">
-                          remove
-                        </button>
-                      </form></td>
+                            <button class="btn btn-danger">edit</button>
+                        </td>
                     </tr>
                 @empty
 

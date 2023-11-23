@@ -10,6 +10,10 @@ use Illuminate\Support\Str;
 use App\Models\Pengguna;
 use App\Models\Kim;
 use App\Models\IdDriver;
+use App\Models\SPBE;
+use App\Models\Kendaraan;
+use App\Imports\SPBE_imports;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class KontrollerUtama extends Controller
@@ -96,21 +100,28 @@ class KontrollerUtama extends Controller
     public function auth_BA_store_kim(Request $request)
     {
         $request->validate([
+            'nama_pt' => 'required|string',
+            'jenis_produk' => 'required|string',
+            'kaspasitas_tangki' => 'required|string',
+            'nopol' => 'required|string',
+            'urut' => 'required|string',
             'masa_berlaku' => 'required|string',
-            'noKIM' => 'required|string|unique:kims,noKIM',
+            'searcher' => 'required|string',
         ]);
         if (!empty($request->input('searcher'))) {
         $Final_Selection_IdDriver = IdDriver::where('id_driver', $request->input('searcher'))->first();
 
         $Kims = new Kim();
-        $Kims->nama = $Final_Selection_IdDriver->nama;
-        $Kims->berlaku = $request->input('masa_berlaku');
-        $Kims->ttl = $Final_Selection_IdDriver->ttl;
-        $Kims->noKIM = $request->input('noKIM');
-        $Kims->foto = $Final_Selection_IdDriver->foto;
+        $Kims->nama_pt = $request->input('nama_pt');
+        $Kims->jenis_produk = $request->input('jenis_produk');
+        $Kims->kaspasitas_tangki = $request->input('kaspasitas_tangki');
+        $Kims->nopol = $request->input('nopol');
+        $Kims->urut = $request->input('urut');
+        $Kims->nama_driver = $Final_Selection_IdDriver->nama;
         $Kims->id_driver = $Final_Selection_IdDriver->id_driver;
+        $Kims->masa_berlaku = $request->input('masa_berlaku');
         $Kims->save();
-        return redirect()->intended('/auth/dashboard/manage/KIMandID')->with('success', 'Row deleted successfully');
+        return redirect()->intended('/auth/dashboard/manage/KIMandID')->with('success', 'Row added successfully');
 
     } else {
        return redirect()->route('auth.Bottomadmin.index.manage.KIMandID.add')->with('error', 'all field is required');
@@ -124,7 +135,7 @@ class KontrollerUtama extends Controller
             'nama' => 'required|string|max:255',
             'tempat' => 'required|string',
             'tanggal' => 'required|string',
-            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'no_sim' => 'required|string',
         ]);
 
     function generateUniqueString($length = 10) {
@@ -140,14 +151,10 @@ class KontrollerUtama extends Controller
     }
     $uniqueCode = generateUniqueString(10);
 
-        $imageName = time().'.'.$request->foto->extension();  
-         
-        $request->foto->move(public_path('uploads'), $imageName);
-
         $IdDriver = new IdDriver();
         $IdDriver->nama = $request->input('nama');
         $IdDriver->ttl = $request->input('tempat').', '. $request->input('tanggal');
-        $IdDriver->foto = $imageName;
+        $IdDriver->no_sim = $request->input('no_sim');
         $IdDriver->id_driver = $uniqueCode;
 
         $IdDriver->save();
@@ -159,6 +166,33 @@ class KontrollerUtama extends Controller
     {
         return view('auth.Bottomadmin.add_id_driver');
     }
+
+    public function dashboard_BottomAdmin_mgSPBE_add()
+    {
+        return view('auth.Bottomadmin.spbe_add');
+    }
+
+    public function dashboard_BottomAdmin_mgSPBE()
+    {
+        $view_SPBE = SPBE::all()->sortByDesc('id');
+        return view('auth.Bottomadmin.spbe_manage', compact('view_SPBE'));
+    }
+
+    public function dashboard_BottomAdmin_mgSPBE_add_POST(Request $request)
+{
+    $company = new SPBE;
+    $company->nama_pt = $request->input('namaPt');
+    $company->kode_spbe = $request->input('kodeSpbe');
+    $company->alamat = $request->input('alamat');
+    $company->kota = $request->input('kota');
+    $company->no_ref = $request->input('noRef');
+    $company->cust_no = $request->input('custNo');
+    $company->patra_ref = $request->input('patraRef');
+    $company->save();
+
+    return redirect()->route('auth.Bottomadmin.index.manage.SPBE')->with('success', 'Company has been added');
+}
+
 
     public function BA_rm_id_driver(Request $request, $id)
     {
@@ -190,19 +224,15 @@ class KontrollerUtama extends Controller
             'nama' => 'required|string|max:255',
             'tempat' => 'required|string',
             'tanggal' => 'required|string',
-            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'no_sim' => 'required|string',
     ]);
     $row = IdDriver::where('id_driver', $id)->first();
-
-    $imageName = time().'.'.$request->foto->extension();  
-         
-    $request->foto->move(public_path('uploads'), $imageName);
 
     if ($row) {
         $row->update([
             'nama' => $request->input('nama'),
             'ttl' => $request->input('tempat').', '. $request->input('tanggal'),
-            'foto' => $imageName,
+            'no_sim' => $request->input('no_sim'),
         ]);
 
         return redirect()->route('auth.Bottomadmin.index.manage.mgIDDriver')->with('success', 'Row updated successfully');
@@ -212,7 +242,7 @@ class KontrollerUtama extends Controller
     }
     public function BA_rm_kim(Request $request, $id)
     {
-    $selector_rm_KIM = Kim::where('noKIM', $id)->first();
+    $selector_rm_KIM = Kim::where('id', $id)->first();
     if ($selector_rm_KIM) {
     $selector_rm_KIM->delete();
 
@@ -226,7 +256,45 @@ class KontrollerUtama extends Controller
     public function dashboard_BottomAdmin_mgKIMandID_add()
     {
         $Selection_IdDriver_add = IdDriver::all()->sortByDesc('id');
-        return view('auth.Bottomadmin.add_kim', compact('Selection_IdDriver_add'));
+        $Selection_Kendaraan_add = Kendaraan::all()->sortByDesc('id');
+        $Selection_Perseroan_Terbatas = SPBE::all()->sortByDesc('id');
+        return view('auth.Bottomadmin.add_kim', compact('Selection_IdDriver_add', 'Selection_Kendaraan_add', 'Selection_Perseroan_Terbatas'));
+    }
+
+    public function importExcel_SPBE(Request $request)
+    {
+    $request->validate([
+        'file' => 'required|mimes:xlsx,csv',
+    ]);
+
+    Excel::import(new SPBE_imports, $request->file('file'));
+
+    return redirect()->route('auth.Bottomadmin.index.manage.SPBE')->with('success', 'Data imported successfully');
+    }
+
+    public function dashboard_BottomAdmin_insert_add_kendaraan()
+    {
+        return view('auth.Bottomadmin.kendaraan_add');
+    }
+    public function dashboard_BottomAdmin_view_kendaraan()
+    {
+        $Kendaraan_view = Kendaraan::all()->sortByDesc('id');
+        return view('auth.Bottomadmin.kendaraan_manage', compact('Kendaraan_view'));
+    }
+
+    public function dashboard_BottomAdmin_insert_run_kendaraan(Request $request)
+    {
+    $request->validate([
+        'nopol' => 'required',
+        'kir_headtruck' => 'required',
+        'kaspasitas_tangki' => 'required',
+    ]);
+    Kendaraan::create([
+        'Nopol' => $request->input('nopol'),
+        'KIR_Headtruck' => $request->input('kir_headtruck'),
+        'Kapasitas_Tangki' => $request->input('kaspasitas_tangki'),
+    ]);
+    return redirect()->route('auth.Bottomadmin.index.manage.kendaraan.add')->with('success', 'Record created successfully!');
     }
 
 // ADMIN LEVEL 2 END// 

@@ -50,6 +50,21 @@ Route::middleware(['auth:AbottomAdmin', 'AbottomAdmin'])->group(function () {
 
     Route::get('/auth/dashboard/manage/KIMandID/add', [KontrollerUtama::class, 'dashboard_BottomAdmin_mgKIMandID_add'])->name('auth.Bottomadmin.index.manage.KIMandID.add');
 
+    Route::get('/auth/dashboard/manage/SPBE/add', [KontrollerUtama::class, 'dashboard_BottomAdmin_mgSPBE_add'])->name('auth.Bottomadmin.index.manage.SPBE.add');
+
+    Route::post('/auth/dashboard/manage/SPBE/add/post', [KontrollerUtama::class, 'dashboard_BottomAdmin_mgSPBE_add_POST'])->name('auth.Bottomadmin.index.manage.SPBE.POST');
+
+    Route::get('/auth/dashboard/manage/SPBE/', [KontrollerUtama::class, 'dashboard_BottomAdmin_mgSPBE'])->name('auth.Bottomadmin.index.manage.SPBE');
+
+    Route::post('/auth/dashboard/manage/SPBE/import-excel', [KontrollerUtama::class, 'importExcel_SPBE'])->name('auth.Bottomadmin.index.manage.SPBE.importExcel');
+
+    Route::get('/auth/dashboard/manage/kendaraan/add', [KontrollerUtama::class, 'dashboard_BottomAdmin_insert_add_kendaraan'])->name('auth.Bottomadmin.index.manage.kendaraan.add');
+
+    Route::get('/auth/dashboard/manage/kendaraan/view', [KontrollerUtama::class, 'dashboard_BottomAdmin_view_kendaraan'])->name('auth.Bottomadmin.index.manage.kendaraan.view');
+
+    Route::post('/auth/dashboard/manage/kendaraan/add/run', [KontrollerUtama::class, 'dashboard_BottomAdmin_insert_run_kendaraan'])->name('auth.Bottomadmin.index.manage.kendaraan.add.run');
+
+
     Route::post('/auth/send/add/user', [KontrollerUtama::class, 'store_pengguna'])->name('auth.send.add');
 });
 // ADMIN LEVEL 2 END //

@@ -248,7 +248,7 @@
       </li>
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#" aria-expanded="false">
-          <i class="bi bi-menu-button-wide"></i><span>Flowchart Admin</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-menu-button-wide"></i><span>Index Admin</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
           <li>
@@ -257,48 +257,21 @@
             </a>
           </li>
         </ul>
-        <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
-          <li>
-            <a href="{{route('auth.Bottomadmin.index.manage.mgIDDriver')}}">
-              <i class="bi bi-circle"></i><span>Manage ID Driver</span>
-            </a>
-          </li>
-        </ul>
-        <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
-          <li>
-            <a href="{{route('auth.Bottomadmin.index.manage.mgIDDriver.add')}}">
-              <i class="bi bi-circle"></i><span>Add ID Driver</span>
-            </a>
-          </li>
-        </ul>
-        <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
-          <li>
-            <a href="{{route('auth.Bottomadmin.index.manage.KIMandID')}}">
-              <i class="bi bi-circle"></i><span>Manage KIM</span>
-            </a>
-          </li>
-        </ul>
-                <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
-          <li>
-            <a href="{{route('auth.Bottomadmin.index.manage.KIMandID.add')}}">
-              <i class="bi bi-circle"></i><span>Add KIM</span>
-            </a>
-          </li>
-        </ul>
       </li>
+
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#" aria-expanded="false">
-          <i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
+        <a class="nav-link collapsed" data-bs-target="#forms-navSPBE" data-bs-toggle="collapse" href="#" aria-expanded="false">
+          <i class="bi bi-journal-text"></i><span>SPBE</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+        <ul id="forms-navSPBE" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
           <li>
-            <a href="forms-elements.html">
-              <i class="bi bi-circle"></i><span>Form Elements</span>
+            <a href="{{route('auth.Bottomadmin.index.manage.SPBE.add')}}">
+              <i class="bi bi-circle"></i><span>Add SPBE</span>
             </a>
           </li>
           <li>
-            <a href="forms-layouts.html">
-              <i class="bi bi-circle"></i><span>Form Layouts</span>
+            <a href="{{route('auth.Bottomadmin.index.manage.SPBE')}}">
+              <i class="bi bi-circle"></i><span>Manage SPBE</span>
             </a>
           </li>
           <li>
@@ -309,6 +282,60 @@
           <li>
             <a href="forms-validation.html">
               <i class="bi bi-circle"></i><span>Form Validation</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-navKendaraan" data-bs-toggle="collapse" href="#" aria-expanded="false">
+          <i class="bi bi-journal-text"></i><span>Kendaraan</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-navKendaraan" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+          <li>
+            <a href="{{route('auth.Bottomadmin.index.manage.kendaraan.add')}}">
+              <i class="bi bi-circle"></i><span>Tambah Kendaraan</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{route('auth.Bottomadmin.index.manage.kendaraan.view')}}">
+              <i class="bi bi-circle"></i><span>Manage Kendaran</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-navDriver" data-bs-toggle="collapse" href="#" aria-expanded="false">
+          <i class="bi bi-journal-text"></i><span>Driver</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-navDriver" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+          <li>
+            <a href="{{route('auth.Bottomadmin.index.manage.mgIDDriver')}}">
+              <i class="bi bi-circle"></i><span>Manage ID Driver</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{route('auth.Bottomadmin.index.manage.mgIDDriver.add')}}">
+              <i class="bi bi-circle"></i><span>Add ID Driver</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-navKIM" data-bs-toggle="collapse" href="#" aria-expanded="false">
+          <i class="bi bi-journal-text"></i><span>KIM</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-navKIM" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+            <li>
+            <a href="{{route('auth.Bottomadmin.index.manage.KIMandID')}}">
+              <i class="bi bi-circle"></i><span>Manage KIM</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{route('auth.Bottomadmin.index.manage.KIMandID.add')}}">
+              <i class="bi bi-circle"></i><span>Add KIM</span>
             </a>
           </li>
         </ul>
