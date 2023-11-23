@@ -16,6 +16,7 @@ class penggunas extends Migration
         Schema::create('penggunas', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('username')->unique()->index();
             $table->string('password');
             $table->string('role');
             $table->timestamps();
